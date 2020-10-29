@@ -1,0 +1,1 @@
+add argparser for each script (for now, Crawler,DomainInfo,FSS,NetworkScanner,SubnetScanner)

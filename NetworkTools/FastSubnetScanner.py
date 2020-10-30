@@ -2,6 +2,8 @@
 # A tool to scan for subdomains of a domain.
 # TODO: add method for input of prefered domain
 
+#### FSS IS DEPRECIATED. USE DOMAIN INFO INSTEAD ###
+
 import requests
 from threading  import Thread   # I'm impatient, ok?
 from queue import Queue

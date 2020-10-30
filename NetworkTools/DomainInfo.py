@@ -42,6 +42,11 @@ def is_registered(domain_name):
 
 def main(domain,n_threads,subdomains):
     global q
+    
+    # Domain Information
+    print("Domain Information for: ", domain)
+    domain_information(domain)
+    
     for subdomain in subdomains:
         q.put(subdomain)
     for t in range(n_threads):
@@ -49,15 +54,14 @@ def main(domain,n_threads,subdomains):
         worker = Thread(target=scan_subdomains, args=(domain,))
         worker.daemon = True
         worker.start()
-    
-domain_name = input("Domain to scan: ")
 
-if is_registered(domain_name):
-    whois_info = whois.whois(domain_name)
-    print("Domain Registrar: ", whois_info.registrar)
-    print("WHOIS Server: ", whois_info.whois_server)
-    print("Creation Date: ", whois_info.creation_date)
-    print("Expiration Date: ", whois_info.expiration_date)
+def domain_information(domain):
+    if is_registered(domain):
+        whois_info = whois.whois(domain)
+        print("Domain Registrar: ", whois_info.registrar)
+        print("WHOIS Server: ", whois_info.whois_server)
+        print("Creation Date: ", whois_info.creation_date)
+        print("Expiration Date: ", whois_info.expiration_date)
 
 if __name__ == "__main__":
     import argparse
@@ -67,7 +71,7 @@ if __name__ == "__main__":
     parser.add_argument("-n", default=10)
 
     args = parser.parse_args()
-    domain = domain_name
+    domain = args.d
     wordlist = args.l
     num_threads = int(args.n)
 

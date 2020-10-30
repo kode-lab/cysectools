@@ -4,30 +4,8 @@
 
 import requests
 import whois 
-from threading import Thread
-from queue import Queue
 import sys
-
-q = Queue()
-
-def scan_subdomains(domain):
-    global q
-    while True:
-        # Get subdomain from Queue
-        subdomain = q.get()
-        # scan subdomain
-        url= f"http://{subdomain}.{domain}"
-        try:
-            requests.get(url)
-        except requests.ConnectionError:
-            pass
-        except KeyboardInterrupt:
-            print("Keyboard Interrupt. Exiting.")
-            sys.exit()
-        else:
-            print("[+] Discovered Subdomain: ", url)
-
-        q.task_done()
+from FastSubnetScanner import scan_domain
 
 def is_registered(domain_name):
     """
@@ -40,21 +18,6 @@ def is_registered(domain_name):
     else:
         return bool(w.domain_name)
 
-def main(domain,n_threads,subdomains):
-    global q
-    
-    # Domain Information
-    print("Domain Information for: ", domain)
-    domain_information(domain)
-    
-    for subdomain in subdomains:
-        q.put(subdomain)
-    for t in range(n_threads):
-        # Start all threads
-        worker = Thread(target=scan_subdomains, args=(domain,))
-        worker.daemon = True
-        worker.start()
-
 def domain_information(domain):
     if is_registered(domain):
         whois_info = whois.whois(domain)
@@ -66,15 +29,21 @@ def domain_information(domain):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="Faster Subdomain Scanner")
-    parser.add_argument("-d")
-    parser.add_argument("-l", default="subdomains.txt")
-    parser.add_argument("-n", default=10)
-
+    parser.add_argument("-d", "--domain", help="Domain to Scan")
+    parser.add_argument("-l", "--wordlist", help="Wordlist to use on FSS", default="subdomains.txt")
+    parser.add_argument("-n", "--num-threads", help="Number of Threads to execute FSS on", default=10)
+    parser.add_argument("-f", "--fss", help="Also do a Fast Subdomain Scan of given Domain, usesage: '-f 1'", default="true", required=False)
+    
     args = parser.parse_args()
-    domain = args.d
-    wordlist = args.l
-    num_threads = int(args.n)
+    domain = args.domain
+    wordlist = args.wordlist
+    num_threads = int(args.num_threads)
 
-    main(domain=domain,n_threads=num_threads,subdomains=open(wordlist).read().splitlines())
-    q.join()
+    # Domain Information
+    print("Domain Information for: ", domain)
+    domain_information(domain)
+
+
+    if args.fss:
+        scan_domain(args.domain,args.num_threads,args.wordlist)
     print("Done")

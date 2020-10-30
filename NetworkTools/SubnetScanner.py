@@ -1,7 +1,10 @@
 # Kode Blue, 10/29/2020
 # A tool to scan for subdomains of a domain.
+# SubnetScanner.py
 
 import requests
+
+print("SubnetScanner is offically depreciated in favor of FastSubnetScanner (FSS)")
 
 domain = input("Which domain do you want to scan: ")
 

@@ -2,7 +2,7 @@
 # Mostly followed this tutorial: https://www.thepythoncode.com/article/building-network-scanner-using-scapy
 # Cheers!
 
-# TODO: Add Input method for Target IP addr, include info for CIDR notation
+# TODO include info for CIDR notation
 
 from scapy.all import ARP, Ether, srp  # import tools from scapy (no need to reinvent the wheel :)
 

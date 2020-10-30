@@ -38,12 +38,12 @@ def controller(domain,n_threads,subdomains):
         worker.daemon = True
         worker.start()
 
-def scanDomain(domain,n_threads,subdomains):
+def scan_domain(domain,n_threads,subdomains):
     global q
     controller(domain=domain,n_threads=n_threads,subdomains=open(subdomains).read().splitlines())
     q.join()
 
-def runAlone():
+def run_alone():
     if __name__ == "__main__":
         import argparse
         parser = argparse.ArgumentParser(description="Faster Subdomain Scanner")
@@ -60,4 +60,4 @@ def runAlone():
         q.join()
         print("Done")
 
-runAlone()
+run_alone()

@@ -5,10 +5,9 @@
 import socket
 import sys
 
-def scanPorts(host):
-    print("Scanning host ", host)
+def scan_ports(host,maxPorts=1024):
     try:
-        for port in range(1,1024):
+        for port in range(1,maxPorts):
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             result = sock.connect_ex((host, port))
             if result == 0:
@@ -27,8 +26,23 @@ def scanPorts(host):
         print("Unable to reach server.")
         sys.exit()
 
-# Get user input
-remoteServer = input("Enter the remote host to scan: ")
-remoteServerIP = socket.gethostbyname(remoteServer)
+def scan_port(host,port):
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        result = sock.connect_ex((host,port))
+        if result == 0:
+            print("Port {}:    Open".format(port))
+        sock.close()
+    except:
+        print("Port {}:    Closed".format(port))
 
-scanPorts(remoteServerIP)
+def main():
+    # Get user input
+    remoteServer = input("Enter the remote host to scan: ")
+    remoteServerIP = socket.gethostbyname(remoteServer)
+
+    print("Scanning Host: ", remoteServerIP)
+    scan_ports(remoteServerIP)
+
+if __name__ == "__main__":
+   main() 

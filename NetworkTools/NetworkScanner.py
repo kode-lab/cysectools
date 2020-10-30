@@ -6,7 +6,9 @@
 
 from scapy.all import ARP, Ether, srp  # import tools from scapy (no need to reinvent the wheel :)
 
-target_ip = "192.164.1.1/24"      # IP address for the destination. TODO: add input method
+target_ip = input("Which IP to scan? Default 192.164.1.1/24 : ")
+if target_ip == "":
+    target_ip = "192.164.1.1/24"      # IP address for the destination. 
 
 arp = ARP(pdst=target_ip)   # Create the ARP packet
 

@@ -1,1 +1,5 @@
 add argparser for each script (for now, Crawler,DomainInfo,FSS,NetworkScanner,SubnetScanner)
+
+BROKEN: PortScanner,HostInfo,FSS,NetworkScanner,Crawler
+
+WorkInProgress:SMBFinder, DomainInfo

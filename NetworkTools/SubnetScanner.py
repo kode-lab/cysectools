@@ -1,10 +1,9 @@
 # Kode Blue, 10/29/2020
 # A tool to scan for subdomains of a domain.
-# TODO: add method for input of prefered domain
 
 import requests
 
-domain="colostate.edu"
+domain = input("Which domain do you want to scan: ")
 
 file = open("subdomains.txt")
 

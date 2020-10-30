@@ -68,7 +68,7 @@ def crawl(url,max_urls=50):
         crawl(link, max_urls=max_urls)
 
 if __name__ == "__main__":
-    crawl("https://www.colostate.edu")
+    crawl = input("Enter full URL of website to crawl: ")
     print("[+] Total External Links: ",len(external_urls))
     print("[+] Total Internal Links: ",len(internal_urls))
     print("[+] Total: ",len(external_urls)+len(internal_urls))

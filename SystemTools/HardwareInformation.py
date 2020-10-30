@@ -5,9 +5,19 @@ import platform
 import psutil
 from datetime import datetime
 
+def get_size(bytes, suffix="B"):
+    """
+    Scale bytes to Human-Readable format
+    """
+    factor = 1024
+    for unit in ["","K","M","G","T","P"]:
+        if bytes < factor:
+            return f"{bytes:.2f}{unit}{suffix}"
+        bytes /= factor
+
 def system_information():
     # System information, gathered from platform.uname()
-    print("="*40,"[System Information]","="*40)
+    print("="*20,"[System Information]","="*20)
     uname=platform.uname()
     print(f"System: {uname.system}")
     print(f"Node Name: {uname.node}")
@@ -18,7 +28,7 @@ def system_information():
 
 def boot_time():
     # Boot time
-    print("="*40,"[Boot Time]","="*40)
+    print("="*20,"[Boot Time]","="*20)
     boot_time_timestamp = psutil.boot_time()
     bt = datetime.fromtimestamp(boot_time_timestamp)
     current_time_timestamp = datetime.now().timestamp()
@@ -28,7 +38,7 @@ def boot_time():
 
 def cpu_info():
     # CPU Information 
-    print("="*40,"[CPU INFORMATION]","="*40)
+    print("="*20,"[CPU INFORMATION]","="*20)
     # Number of Cores
     print("Physical Cores: ", psutil.cpu_count(logical=False))
     print("Total Cores: ", psutil.cpu_count(logical=True))
@@ -45,14 +55,14 @@ def cpu_info():
 
 def mem_info():
     # Memory (RAM) informaiton
-    print("="*40,"[Memory Information]","="*40)
+    print("="*20,"[Memory Information]","="*20)
     svmem = psutil.virtual_memory()
     print(f"Total: {get_size(svmem.total)}")
     print(f"Available: {get_size(svmem.available)}")
     print(f"Used: {get_size(svmem.used)}")
     print(f"Percentage: {svmem.percent}%")
     # Swap details (if there is any)
-    print("="*10,"[SWAP]","="*10)
+    print("="*5,"[SWAP]","="*5)
     swap = psutil.swap_memory()
     print(f"Total: {get_size(swap.total)}")
     print(f"Free: {get_size(swap.free)}")
@@ -60,7 +70,7 @@ def mem_info():
     print(f"Percentage: {swap.percent}%")
     
 def disk_info():
-    print("="*40,"[Disk Information]","="*40)
+    print("="*20,"[Disk Information]","="*20)
     print("Partitions and Usage:")
     # Get Disk Paritions
     parts = psutil.disk_partitions()
@@ -75,7 +85,7 @@ def disk_info():
             continue
         print(f"    Total Size: {get_size(partition_usage.total)}")
         print(f"    Used: {get_size(partition_usage.used)}")
-        print(f"    Free: {get_size(partition_usage.free}")
+        print(f"    Free: {get_size(partition_usage.free)}")
         print(f"    Percentage: {partition_usage.percent}%")
     
     # Get IO stats since boot
@@ -83,18 +93,18 @@ def disk_info():
     print(f"Total read: {get_size(disk_io.read_bytes)}")
     print(f"Total Write: {get_size(disk_io.write_bytes)}")
 
-def net_inf0():
+def net_info():
     # Network Information
-    print("="*40,"[Network Information]","="*40)
+    print("="*20,"[Network Information]","="*20)
     if_addrs = psutil.net_if_addrs()
-    for interface_name, interface_address in if_addrs.items():
+    for interface_name, interface_addresses in if_addrs.items():
         for address in interface_addresses:
             print(f"=== Interface: {interface_name} ===")
             if str(address.family) == 'AddressFamily.AF_INET':
                 print(f"    IP Address:    {address.address}")
                 print(f"    Netmask:       {address.netmask}")
                 print(f"    Broadcast IP:  {address.broadcast}")
-            elif str(address.family) == 'AddressFamily.AF_PACKET'):
+            elif str(address.family) == 'AddressFamily.AF_PACKET':
                 print(f"    MAC Address:   {address.address}")
                 print(f"    Netmask:       {address.address}")
                 print(f"    Broadcast MAC: {address.address}")

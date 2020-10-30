@@ -28,7 +28,7 @@ def scan_subdomains(domain):
 
         q.task_done()
 
-def main(domain,n_threads,subdomains):
+def controller(domain,n_threads,subdomains):
     global q
     for subdomain in subdomains:
         q.put(subdomain)
@@ -38,18 +38,26 @@ def main(domain,n_threads,subdomains):
         worker.daemon = True
         worker.start()
 
-if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser(description="Faster Subdomain Scanner")
-    parser.add_argument("-d", "--domain", help="Domain to Scan")
-    parser.add_argument("-l", "--wordlist", help="Wordlist to Scan from", default="subdomains.txt")
-    parser.add_argument("-n", "--num-threads", help="Number of threads to use", default=10)
-
-    args = parser.parse_args()
-    domain = args.domain
-    wordlist = args.wordlist
-    num_threads = int(args.num_threads)
-
-    main(domain=domain,n_threads=num_threads,subdomains=open(wordlist).read().splitlines())
+def scanDomain(domain,n_threads,subdomains):
+    global q
+    controller(domain=domain,n_threads=n_threads,subdomains=open(subdomains).read().splitlines())
     q.join()
-    print("Done")
+
+def runAlone():
+    if __name__ == "__main__":
+        import argparse
+        parser = argparse.ArgumentParser(description="Faster Subdomain Scanner")
+        parser.add_argument("-d", "--domain", help="Domain to Scan")
+        parser.add_argument("-l", "--wordlist", help="Wordlist to Scan from", default="subdomains.txt")
+        parser.add_argument("-n", "--num-threads", help="Number of threads to use", default=10)
+
+        args = parser.parse_args()
+        domain = args.domain
+        wordlist = args.wordlist
+        num_threads = int(args.num_threads)
+
+        controller(domain=domain,n_threads=num_threads,subdomains=open(wordlist).read().splitlines())
+        q.join()
+        print("Done")
+
+runAlone()

@@ -1,10 +1,13 @@
 # Kode Blue, 10/29/2020
 # Tool for finding links on a domain (domain.com/link, /link/lowerlink, etc)
+# Crawler.py
 
 import requests
 from urllib.parse import urlparse, urljoin
 from bs4 import BeautifulSoup
 import colorama
+
+print("Broken")
 
 # initalize colorama, used for making the resulting links pretty
 colorama.init()

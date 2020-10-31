@@ -1,7 +1,5 @@
 add argparser for each script (for now, Crawler,NetworkScanner)
 
-BROKEN: HostInfo,
-
-BROKEN: Crawler #dontwannasuportit <- thats a hashtag, not a comment;) 
+BROKEN: Crawler is broken, and I don't want to support it anymore.
 
 WorkInProgress:SMBFinder, DomainInfo

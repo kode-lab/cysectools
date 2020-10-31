@@ -1,0 +1,47 @@
+If you're reading this from some time in the far (or maybe not so far) future,
+hold on to your butt, cause you're in for a wild ride.
+
+Our story begins about 3 days ago, October 27th, 2020. I saw a post on Reddit that said
+something to the effect of "having a github repo with tools you maintain on your own time
+will get you an interview in whatever area of CS you want to go into."
+
+So I made this repo. Started out with just 1 tool, a network scanner (cause that's
+like the hello,world of cybersecurity. That quickly blew up into a whole set of network tools.
+Shortly thereafter I found myself writing line after line of code that I totally understood,
+for the first time in my life. 
+
+I have some programming experience. C++, VB (visual basic is trash), JS (the code.org version
+that isn't really JavaScript) and Python. Also a bit of bash scripting.  Also, immideately before
+embarking on this entire journey, I had just finished (version 1) of my riced Arch installation
+(I use Arch, BTW).
+
+But writing all this code (mostly in the NetworkTools dir) made me feel so good, so I kept writing
+more code. Then I drank 3 coffees. So for the next 7 hours straight (only one break cause I really
+had to pee), I wrote code. Nonstop. I know because I was listening to a playlist on Spotify, and 
+it was 7 hours long. 
+
+So it's 12:30 am on October 31st, I've been writing code for 7 hours straight, and what does my
+brain decide I need to do? Make just a few small tewaks to my SXHKD so that I can launch Firefox 
+using super + f. (what could go wrong editing a configuration file I haven't even looked at in
+weeks and don't remember how I set it up in the first place?)
+
+Now it's 1:30 am. I finally feel good about how I have everything setup, so I shutdown, and
+crawl into bed. 
+
+Random Idea time: I've been using this really handy tool called wmic on Windows (it's offically
+depreciated, but what if there was a way to create a program that did all the things wmic did? 
+Also, I need to do my laundry. 
+
+So I do the only reasonable thing: I grab my dirty laundry, my laptop, and a Monster, a Coffee,
+and a Cream Soda Dr. Pepper, and I head to the building laundry facility. At 2:00 am.
+
+It takes me about an hour and a half to do my laundry, and during that time I'm hammering away
+at my own personal verison of wmic. (For those of you keeping track, I woke up at 6 am on October 
+30th, and it's now 3:30 am on October 31st. I have not slept yet. Also, I have had 6 highly
+caffinated beverages in that timeframe.
+
+My brain gave out at around 5 am. It's now 8:12 am, and I still haven't slept. Probably won't be 
+able to until sometime around 6pm :/ . Oh well.
+
+Moral of the story: it doesn't matter if you missed Halloween because you entertained a wild night
+of coding and other Computer Science, because Halloween got canceled by COVID anyway. 

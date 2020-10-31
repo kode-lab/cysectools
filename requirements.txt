@@ -6,3 +6,4 @@ future==0.18.2
 python-whois==0.7.3
 psutil==5.7.3
 cryptography==3.2.1
+fleep==1.0.1
